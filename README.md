@@ -2,7 +2,7 @@
 
 # Installation
 
-First install Vundle
+First install Vundle https://github.com/VundleVim/Vundle.vim
 ```
 $ cd ~
 $ git clone https://github.com/donald122/VimDotfile
