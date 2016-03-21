@@ -1,6 +1,8 @@
 # VimDotfile
 
 # Installation
+
+##First install Vundle
 ```
 $ cd ~
 $ git clone https://github.com/donald122/VimDotfile
