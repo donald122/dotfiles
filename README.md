@@ -11,3 +11,4 @@ $ ln -s ~/dotfiles/vim ~/.vim
 $ ln -s ~/dotfiles/vimrc.bundles ~/.vimrc.bundles
 $ ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 ```
+Run :PluginInstall in Vim
