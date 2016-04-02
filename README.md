@@ -11,5 +11,5 @@ $ ln -s ~/dotfiles/vim ~/.vim
 $ ln -s ~/dotfiles/vimrc.bundles ~/.vimrc.bundles
 $ ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 ```
-install Vundle https://github.com/VundleVim/Vundle.vim
+install Vundle https://github.com/VundleVim/Vundle.vim \n
 Run :PluginInstall in Vim
