@@ -206,7 +206,6 @@ set background=dark
 set encoding=utf-8
 colorscheme solarized
 
-
 " Highlight line number of where cursor currently is
 hi CursorLineNr guifg=#050505
 
@@ -223,11 +222,11 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 
-:nnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
-:nnoremap <expr> yy (v:register ==# '"' ? '"+' : '') . 'yy'
-:nnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
-:xnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
-:xnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
+" :nnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
+" :nnoremap <expr> yy (v:register ==# '"' ? '"+' : '') . 'yy'
+" :nnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
+" :xnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
+" :xnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
 
 " convert hash rockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
@@ -312,3 +311,18 @@ map <Leader>a :call RunAllSpecs()<CR>
 
 " Map NERDTree
 
+""""""""""""""""""""""""""""""""""""""
+"Puppet stuff
+""""""""""""""""""""""""""""""""""""""
+autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 autoindent
+autocmd Bufread,BufNewFile *.erb setlocal tabstop=2 shiftwidth=2 autoindent
+autocmd Bufread,BufNewFile *.pp setlocal tabstop=2 shiftwidth=2 autoindent
+
+
+" high light unused space
+:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+\%#\@<!$/
+
+
+""""""""""""""""""""""""""""""""""""""

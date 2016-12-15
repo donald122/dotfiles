@@ -8,7 +8,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Define bundles via Github repos
-Bundle 'tpope/vim-sensible'
+Plugin 'tpope/vim-sensible'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-projectionist'
 Bundle 'mustache/vim-mustache-handlebars'
@@ -48,5 +48,6 @@ Bundle 'jsx/jsx.vim'
 Bundle 'terryma/vim-expand-region'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'Yggdroot/indentLine'
+Plugin 'Puppet-Syntax-Highlighting'
 
 filetype on
