@@ -66,12 +66,6 @@ map <Leader>gs :Gstatus<CR>
 map <Leader>gc :Gcommit<CR>
 map <Leader>gp :Gpush<CR>
 "
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
 
 " Toggle nerdtree with F10
 map <F10> :NERDTreeToggle<CR>
@@ -312,7 +306,7 @@ map <Leader>a :call RunAllSpecs()<CR>
 " Map NERDTree
 
 """"""""""""""""""""""""""""""""""""""
-"Puppet stuff
+" Puppet stuff
 """"""""""""""""""""""""""""""""""""""
 autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 autoindent
 autocmd Bufread,BufNewFile *.erb setlocal tabstop=2 shiftwidth=2 autoindent
@@ -325,4 +319,9 @@ autocmd Bufread,BufNewFile *.pp setlocal tabstop=2 shiftwidth=2 autoindent
 :match ExtraWhitespace /\s\+\%#\@<!$/
 
 
-""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""
+" Undo setting
+"""""""""""""""""""""""""""""""""""""""
+set undofile

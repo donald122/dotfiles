@@ -86,7 +86,16 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 eval $(thefuck --alias)
-alias pview="ssh -t 192.168.8.139 pview"
 keychain --nogui --quiet id_ed25519 id_rsa
 # time command setting
 TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
+###########################################################################
+#
+# Alias
+###########################################################################
+alias pview="ssh -t 192.168.8.139 pview"
+alias wgtn="export OS_REGION_NAME=nz_wlg_2"
+alias por="export OS_REGION_NAME=nz-por-1"
+alias hlz="export OS_REGION_NAME=nz-hlz-1"
+alias kv2='OS_AUTH_URL=https://api.cloud.catalyst.net.nz:5000/v2.0; export OS_IDENTITY_API_VERSION=2'
+alias kv3='OS_AUTH_URL=https://api.cloud.catalyst.net.nz:5000/; export OS_IDENTITY_API_VERSION=3'
