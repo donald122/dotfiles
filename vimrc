@@ -306,11 +306,14 @@ map <Leader>a :call RunAllSpecs()<CR>
 " Map NERDTree
 
 """"""""""""""""""""""""""""""""""""""
-" Puppet stuff
+" Command runs for given file type
 """"""""""""""""""""""""""""""""""""""
 autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 autoindent
+autocmd FileType sh setlocal tabstop=2 shiftwidth=2 autoindent
 autocmd Bufread,BufNewFile *.erb setlocal tabstop=2 shiftwidth=2 autoindent
 autocmd Bufread,BufNewFile *.pp setlocal tabstop=2 shiftwidth=2 autoindent
+
+""""""""""""""""""""""""""""""""""""""
 
 
 " high light unused space
@@ -318,8 +321,6 @@ autocmd Bufread,BufNewFile *.pp setlocal tabstop=2 shiftwidth=2 autoindent
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+\%#\@<!$/
 
-
-"""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""
 " Undo setting

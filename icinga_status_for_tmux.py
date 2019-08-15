@@ -2,11 +2,19 @@
 import time
 import json
 import os
+import psutil
 import sys
 from tempfile import NamedTemporaryFile
 from pynag.Parsers import status
 import paramiko
 import yaml
+import random
+
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+
+from pushbullet import Pushbullet
 
 def get_statusfile(label, host, remote_statusfile):
     # ssh to each server in the config, grab the status.dat
@@ -31,6 +39,9 @@ def parse_status(tempfile):
     color = "#00ff00" # green
     s = status(tempfile)
     s.parse()
+
+    critical_msg = ""
+
     for service in s.data.get('servicestatus', []):
         if (int(service.get('scheduled_downtime_depth', None)) == 0
                 and int(service.get('problem_has_been_acknowledged',
@@ -40,13 +51,18 @@ def parse_status(tempfile):
                 warning += 1
             elif (int(service.get('current_state', None)) == 2):
                 critical += 1
+                if (int(service.get('notifications_enabled', None)) == 1):
+                    critical_msg = (critical_msg + service.get('host_name') + "\n" +
+                                    service.get('service_description') + " \n" +
+                                    service.get('plugin_output', None) + "\n\n")
+
             elif (int(service.get('current_state', None)) == 3):
                 unknown += 1
         if critical > 0:
             color = "#ff0000" # red
         elif warning > 0:
             color = "#ffff00"# yellow
-    return {'warning': warning, 'critical': critical, 'unknown': unknown, 'color': color}
+    return {'warning': warning, 'critical': critical, 'unknown': unknown, 'color': color}, critical_msg
 
 statusfile = "/var/lib/icinga/status.dat"
 regions = [{'label': 'Prepro', 'host': 'tst-wgtn-mon0'},
@@ -55,7 +71,13 @@ regions = [{'label': 'Prepro', 'host': 'tst-wgtn-mon0'},
            {'label': 'NZ-HLZ-1', 'host': 'cat-hlz-mon0'}
           ]
 
+
 if __name__ == "__main__":
+
+    has_alerted = False
+
+    apikey = "o.SNZMl5TjlVDhtWRDqs9yqiZdg9s23xwA"
+    #pb = Pushbullet(apikey)
 
     for region in regions:
         try:
@@ -63,7 +85,7 @@ if __name__ == "__main__":
         except:
             continue
 
-        servicestatus = parse_status(status_file)
+        servicestatus, critical_msg = parse_status(status_file)
         if status_file.startswith('/tmp/icingastatus'):
             os.unlink(status_file)
         text = "{}: #[fg={}]Warn: {} Crit: {}#[fg=default]".format(    #[fg={}] is for setting color in tmux configuration
@@ -73,4 +95,14 @@ if __name__ == "__main__":
             servicestatus['critical'])
         print text + " |",
         sys.stdout.flush()
+
+        # send out notification
+        if (region['label'] != "Prepro" and critical_msg and ("sleep 60" not in os.popen("ps -Af").read()[:])):
+            #pb.push_note("Critical in " + region['label'], critical_msg)
+            has_alerted = True
+
+    if has_alerted:
+        os.system('sleep 60 &')
+
     time.sleep(5)
+
