@@ -21,6 +21,7 @@ def get_statusfile(label, host, remote_statusfile):
     tf = NamedTemporaryFile(prefix='icingastatus-', delete=False)
     tempfilename = tf.name
     tf.close()
+    paramiko.util.log_to_file ('paramiko.log')
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(host, timeout=10, port=22)

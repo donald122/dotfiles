@@ -97,8 +97,24 @@ TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 SOCK="/tmp/ssh-agent-$USER-screen"
 if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
 then
-    ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+    env | grep ssh_auth_sock || ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 fi
+
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+
+##########################################################################
+#
+# Fix Display
+##########################################################################
+
+function get_display {
+    ps -u $(id -u) -o pid= | \
+        while read pid; do
+            cat /proc/$pid/environ 2>/dev/null | tr '\0' '\n' | grep '^DISPLAY=:'
+        done | grep -o ':[0-9]*' | sort -u
+}
+
+tmux setenv DISPLAY $(get_display)
 
 ###########################################################################
 #
@@ -111,3 +127,11 @@ alias hlz="export OS_REGION_NAME=nz-hlz-1"
 alias kv2='OS_AUTH_URL=https://api.cloud.catalyst.net.nz:5000/v2.0; export OS_IDENTITY_API_VERSION=2'
 alias kv3='OS_AUTH_URL=https://api.cloud.catalyst.net.nz:5000/; export OS_IDENTITY_API_VERSION=3'
 alias icingatime="perl -pe 's/(\d+)/localtime($1)/e'"
+# tmuxcp 0:2.1 | head  # or can use 0:name.1
+alias tmuxcp="tmux capture-pane -pS -100000 -t"
+
+###########################################################################
+#
+# History options
+###########################################################################
+unsetopt share_history
