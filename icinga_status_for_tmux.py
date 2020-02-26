@@ -77,9 +77,6 @@ if __name__ == "__main__":
 
     has_alerted = False
 
-    apikey = "o.SNZMl5TjlVDhtWRDqs9yqiZdg9s23xwA"
-    #pb = Pushbullet(apikey)
-
     for region in regions:
         try:
             status_file = get_statusfile(region['label'], region['host'], statusfile)
