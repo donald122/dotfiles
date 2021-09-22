@@ -107,14 +107,14 @@ export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 # Fix Display
 ##########################################################################
 
-function get_display {
-    ps -u $(id -u) -o pid= | \
-        while read pid; do
-            cat /proc/$pid/environ 2>/dev/null | tr '\0' '\n' | grep '^DISPLAY=:'
-        done | grep -o ':[0-9]*' | sort -u
-}
+#function get_display {
+#    ps -u $(id -u) -o pid= | \
+#        while read pid; do
+#            cat /proc/$pid/environ 2>/dev/null | tr '\0' '\n' | grep '^DISPLAY=:'
+#        done | grep -o ':[0-9]*' | sort -u
+#}
 
-tmux setenv DISPLAY $(get_display)
+#tmux setenv DISPLAY $(get_display)
 
 ###########################################################################
 #
