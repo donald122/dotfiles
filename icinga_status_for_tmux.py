@@ -66,7 +66,7 @@ def parse_status(tempfile):
     return {'warning': warning, 'critical': critical, 'unknown': unknown, 'color': color}, critical_msg
 
 statusfile = "/var/lib/icinga/status.dat"
-regions = [{'label': 'Prepro', 'host': 'tst-wgtn-mon0'},
+regions = [{'label': 'NZ-PPD-1', 'host': 'cc-ppd1-mon0'},
            {'label': 'NZ_WLG_2', 'host': 'cat-wgtn-mon0'},
            {'label': 'NZ-POR-1', 'host': 'cat-por-mon0'},
            {'label': 'NZ-HLZ-1', 'host': 'cat-hlz-mon0'}

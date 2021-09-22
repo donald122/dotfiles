@@ -199,6 +199,8 @@ let g:solarized_termcolors=256
 set background=dark
 set encoding=utf-8
 colorscheme solarized
+highlight Comment ctermfg=244
+highlight Normal ctermfg=249
 
 " Highlight line number of where cursor currently is
 hi CursorLineNr guifg=#050505
